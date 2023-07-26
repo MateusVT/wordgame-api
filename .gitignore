@@ -1,0 +1,12 @@
+# IDE files
+.idea/
+
+# GoLand files
+.idea
+
+# VSCode files
+.vscode
+*.code-workspace
+
+# Log files
+*.log

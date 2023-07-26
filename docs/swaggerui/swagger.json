@@ -1,0 +1,105 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "WordGame API:",
+    "version": "v1.0"
+  },
+  "host": "localhost:1337",
+  "basePath": "/",
+  "paths": {
+    "/guess": {
+      "post": {
+        "description": "Allows users to make a guess in a game by providing an ID and a guessed letter.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Make a guess in a game",
+        "operationId": "makesGuess",
+        "parameters": [
+          {
+            "$ref": "#/definitions/guessRequest",
+            "description": "ID of the game and the guessed letter",
+            "name": "body",
+            "in": "body",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/new": {
+      "post": {
+        "description": "Allows users to start a new guessing game.",
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Start a new guessing game",
+        "operationId": "newGame"
+      }
+    }
+  },
+  "definitions": {
+    "gameResponse": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "description": "Current Word current state\n\nin: string",
+          "type": "string",
+          "x-go-name": "Current",
+          "example": "\"__PP__\""
+        },
+        "guesses_remaining": {
+          "description": "GuessesRemaining Amount of guesses remaining\n\nin: int64",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "GuessesRemaining",
+          "example": 4
+        },
+        "id": {
+          "description": "The ID of the Game applying a guess\n\nin: string",
+          "type": "string",
+          "x-go-name": "ID",
+          "example": "\"5d96bca0-2cf6-11ee-be56-0242ac120002\""
+        }
+      },
+      "x-go-name": "GameResponse",
+      "x-go-package": "github.com/fleetdm/wordgame/internal/api/responses"
+    },
+    "guessRequest": {
+      "description": "GuessRequest contains the ID of the game and the guessed letter",
+      "type": "object",
+      "required": [
+        "id",
+        "guess"
+      ],
+      "properties": {
+        "guess": {
+          "description": "The guessing letter\n\nin: string",
+          "type": "string",
+          "x-go-name": "Guess",
+          "example": "\"A\""
+        },
+        "id": {
+          "description": "The ID of the Game applying a guess\n\nin: string",
+          "type": "string",
+          "x-go-name": "ID",
+          "example": "\"5d96bca0-2cf6-11ee-be56-0242ac120002\""
+        }
+      },
+      "x-go-name": "GuessRequest",
+      "x-go-package": "github.com/fleetdm/wordgame/internal/api/requests"
+    }
+  }
+}
